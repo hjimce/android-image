@@ -1,0 +1,27 @@
+# ninja log v5
+0	169	0	CMakeFiles/hello-jni.dir/hello-jni.c.o	cfcefc93a038ae3b
+170	413	0	D:/Android/ndk/hello-jni/app/.externalNativeBuild/cmake/arm7Debug/obj/mips/libhello-jni.so	707b1dce2da2ce
+1	151	0	CMakeFiles/hello-jni.dir/hello-jni.c.o	cfcefc93a038ae3b
+151	374	0	D:/Android/ndk/hello-jni/app/.externalNativeBuild/cmake/arm7Debug/obj/mips/libhello-jni.so	707b1dce2da2ce
+1	157	0	CMakeFiles/hello-jni.dir/hello-jni.c.o	cfcefc93a038ae3b
+157	440	0	D:/Android/ndk/hello-jni/app/.externalNativeBuild/cmake/arm7Debug/obj/mips/libhello-jni.so	707b1dce2da2ce
+1	390	0	CMakeFiles/hello-jni.dir/hello-jni.c.o	cfcefc93a038ae3b
+390	913	0	D:/Android/ndk/hello-jni/app/.externalNativeBuild/cmake/arm7Debug/obj/mips/libhello-jni.so	707b1dce2da2ce
+0	223	0	CMakeFiles/hello-jni.dir/hello-jni.c.o	cfcefc93a038ae3b
+223	430	0	D:/Android/ndk/hello-jni/app/.externalNativeBuild/cmake/arm7Debug/obj/mips/libhello-jni.so	707b1dce2da2ce
+1	356	0	CMakeFiles/hello-jni.dir/hello-jni.c.o	cfcefc93a038ae3b
+356	768	0	D:/Android/ndk/hello-jni/app/.externalNativeBuild/cmake/arm7Debug/obj/mips/libhello-jni.so	707b1dce2da2ce
+1	153	0	CMakeFiles/hello-jni.dir/hello-jni.c.o	cfcefc93a038ae3b
+153	399	0	D:/Android/ndk/hello-jni/app/.externalNativeBuild/cmake/arm7Debug/obj/mips/libhello-jni.so	707b1dce2da2ce
+1	175	0	CMakeFiles/hello-jni.dir/hello-jni.c.o	cfcefc93a038ae3b
+175	377	0	D:/Android/ndk/hello-jni/app/.externalNativeBuild/cmake/arm7Debug/obj/mips/libhello-jni.so	707b1dce2da2ce
+0	155	0	CMakeFiles/hello-jni.dir/hello-jni.c.o	cfcefc93a038ae3b
+155	350	0	D:/Android/ndk/hello-jni/app/.externalNativeBuild/cmake/arm7Debug/obj/mips/libhello-jni.so	707b1dce2da2ce
+1	163	0	CMakeFiles/hello-jni.dir/hello-jni.c.o	cfcefc93a038ae3b
+163	427	0	D:/Android/ndk/hello-jni/app/.externalNativeBuild/cmake/arm7Debug/obj/mips/libhello-jni.so	707b1dce2da2ce
+1	150	0	CMakeFiles/hello-jni.dir/hello-jni.c.o	cfcefc93a038ae3b
+150	377	0	D:/Android/ndk/hello-jni/app/.externalNativeBuild/cmake/arm7Debug/obj/mips/libhello-jni.so	707b1dce2da2ce
+0	3268	0	CMakeFiles/hello-jni.dir/hello-jni.c.o	cfcefc93a038ae3b
+3268	3650	0	D:/Android/ndk/hello-jni/app/.externalNativeBuild/cmake/arm7Debug/obj/mips/libhello-jni.so	707b1dce2da2ce
+1	161	0	CMakeFiles/hello-jni.dir/hello-jni.c.o	cfcefc93a038ae3b
+161	407	0	D:/Android/ndk/hello-jni/app/.externalNativeBuild/cmake/arm7Debug/obj/mips/libhello-jni.so	707b1dce2da2ce

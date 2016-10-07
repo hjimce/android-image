@@ -1,0 +1,27 @@
+# ninja log v5
+0	206	0	CMakeFiles/hello-jni.dir/hello-jni.c.o	6170630612f94363
+207	441	0	D:/Android/ndk/hello-jni/app/.externalNativeBuild/cmake/arm7Debug/obj/armeabi-v7a/libhello-jni.so	35b569247ff85839
+0	145	0	CMakeFiles/hello-jni.dir/hello-jni.c.o	6170630612f94363
+145	673	0	D:/Android/ndk/hello-jni/app/.externalNativeBuild/cmake/arm7Debug/obj/armeabi-v7a/libhello-jni.so	35b569247ff85839
+1	213	0	CMakeFiles/hello-jni.dir/hello-jni.c.o	6170630612f94363
+213	520	0	D:/Android/ndk/hello-jni/app/.externalNativeBuild/cmake/arm7Debug/obj/armeabi-v7a/libhello-jni.so	35b569247ff85839
+0	144	0	CMakeFiles/hello-jni.dir/hello-jni.c.o	6170630612f94363
+145	375	0	D:/Android/ndk/hello-jni/app/.externalNativeBuild/cmake/arm7Debug/obj/armeabi-v7a/libhello-jni.so	35b569247ff85839
+0	154	0	CMakeFiles/hello-jni.dir/hello-jni.c.o	6170630612f94363
+154	381	0	D:/Android/ndk/hello-jni/app/.externalNativeBuild/cmake/arm7Debug/obj/armeabi-v7a/libhello-jni.so	35b569247ff85839
+0	149	0	CMakeFiles/hello-jni.dir/hello-jni.c.o	6170630612f94363
+149	416	0	D:/Android/ndk/hello-jni/app/.externalNativeBuild/cmake/arm7Debug/obj/armeabi-v7a/libhello-jni.so	35b569247ff85839
+1	158	0	CMakeFiles/hello-jni.dir/hello-jni.c.o	6170630612f94363
+158	412	0	D:/Android/ndk/hello-jni/app/.externalNativeBuild/cmake/arm7Debug/obj/armeabi-v7a/libhello-jni.so	35b569247ff85839
+1	145	0	CMakeFiles/hello-jni.dir/hello-jni.c.o	6170630612f94363
+145	424	0	D:/Android/ndk/hello-jni/app/.externalNativeBuild/cmake/arm7Debug/obj/armeabi-v7a/libhello-jni.so	35b569247ff85839
+0	145	0	CMakeFiles/hello-jni.dir/hello-jni.c.o	6170630612f94363
+145	423	0	D:/Android/ndk/hello-jni/app/.externalNativeBuild/cmake/arm7Debug/obj/armeabi-v7a/libhello-jni.so	35b569247ff85839
+1	143	0	CMakeFiles/hello-jni.dir/hello-jni.c.o	6170630612f94363
+143	371	0	D:/Android/ndk/hello-jni/app/.externalNativeBuild/cmake/arm7Debug/obj/armeabi-v7a/libhello-jni.so	35b569247ff85839
+1	154	0	CMakeFiles/hello-jni.dir/hello-jni.c.o	6170630612f94363
+154	360	0	D:/Android/ndk/hello-jni/app/.externalNativeBuild/cmake/arm7Debug/obj/armeabi-v7a/libhello-jni.so	35b569247ff85839
+0	146	0	CMakeFiles/hello-jni.dir/hello-jni.c.o	6170630612f94363
+146	398	0	D:/Android/ndk/hello-jni/app/.externalNativeBuild/cmake/arm7Debug/obj/armeabi-v7a/libhello-jni.so	35b569247ff85839
+1	152	0	CMakeFiles/hello-jni.dir/hello-jni.c.o	6170630612f94363
+152	473	0	D:/Android/ndk/hello-jni/app/.externalNativeBuild/cmake/arm7Debug/obj/armeabi-v7a/libhello-jni.so	35b569247ff85839
