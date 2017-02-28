@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.opengl.GLSurfaceView;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,9 +16,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import jp.co.cyberagent.android.gpuimage.GPUImage;
+import jp.co.cyberagent.android.gpuimage.GPUImageSepiaFilter;
+import jp.co.cyberagent.android.gpuimage.GPUImageSobelEdgeDetection;
+
 public class MainActivity extends AppCompatActivity {
 
-    // Used to load the 'native-lib' library on application startup.
+    // c++链接库
     static {
         System.loadLibrary("native-lib");
     }
@@ -26,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         // Example of a call to a native method
 
@@ -62,16 +68,31 @@ public class MainActivity extends AppCompatActivity {
                 picturePath = uri.getPath();
             }
 
+            //
+
+
+
             //读取图片，并显示到控件imageView
             ImageView imageView = (ImageView) findViewById(R.id.imageView);
             Bitmap d= BitmapFactory.decodeFile(picturePath);
-            int nh = (int) ( d.getHeight() * (512.0 / d.getWidth()) );
+            int nh = (int) ( d.getHeight() * (512.0 / d.getWidth()) );//把图片缩放到可以在屏幕上显示
             Bitmap scaled = Bitmap.createScaledBitmap(d, 512, nh, true);
+            //gpu 预处理
+            GPUImage mGPUImage = new GPUImage(this);
+            //mGPUImage.setGLSurfaceView((GLSurfaceView) findViewById(R.id.imageView));//加入这句，程序会崩溃
+            mGPUImage.setImage(scaled); //设置gpu要处理的图片
+            mGPUImage.setFilter(new GPUImageSobelEdgeDetection());//设置滤波方法
+            d = mGPUImage.getBitmapWithFilterApplied();//进行gpu图像处理，获取处理后的图片
 
-            imageView.setImageBitmap(scaled);
 
-            //final TextView text = (TextView) findViewById(R.id.textView);
-            //text.setText(picturePath);
+
+
+
+
+
+            imageView.setImageBitmap(d);//设置view控件中的显示内容
+
+
             TextView tv = (TextView) findViewById(R.id.sample_text);
             tv.setText(stringFromJNI(picturePath));
 
