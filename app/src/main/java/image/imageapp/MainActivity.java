@@ -20,6 +20,10 @@ import jp.co.cyberagent.android.gpuimage.GPUImage;
 import jp.co.cyberagent.android.gpuimage.GPUImageSobelEdgeDetection;
 //renderscript导入
 import android.renderscript.RenderScript;
+
+import java.util.Arrays;
+import java.util.List;
+
 import network.CNNdroid;
 
 
@@ -95,24 +99,25 @@ public class MainActivity extends AppCompatActivity {
 
                 // 2) Construct a CNNdroid object
                 //	  and provide NetFile location address.
-                String NetFile = "/storage/emulated/0/tmp/alexnet/AlexNet_def.txt";
+                String NetFile = "/sdcard/1_def.txt";
                 CNNdroid myCNN = new CNNdroid(myRenderScript, NetFile);
 
                 // 3) Prepare your input to the network.
                 //		(The input can be single or batch of images.)
-                //float[][][]  inputSingle = new float[3][227][227];
+                float[][][]  inputSingle = new float [3][227][227];
 
                 // 4) Call the Compute function of the CNNdroid library
                 //    and get the result of the CNN execution as an Object
                 //	  when the computation is finished.
-                //Object output = myCNN.compute(inputSingle);
+                Object output = myCNN.compute(inputSingle);
+                imageView.setImageBitmap(resultimage);//设置view控件中的显示内容
 
 
 
             } catch (Exception e) {
-                //TextView tv = (TextView) findViewById(R.id.sample_text);
+                TextView tv = (TextView) findViewById(R.id.sample_text);
                 //tv.setText(stringFromJNI(picturePath));
-                //tv.setText(e.toString());
+                tv.setText(e.toString());
                 e.printStackTrace();
             }
 
@@ -121,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-            imageView.setImageBitmap(resultimage);//设置view控件中的显示内容
+
 
 
 
