@@ -50,7 +50,7 @@ public class CNNdroid {
     }
 
     // support for 3d input
-    public Object compute(Object input) throws Exception{
+    public Object compute(Object input) {
         Object output;
         if (input.getClass().toString().equals("class [[[[F"))
             output = input;
@@ -269,7 +269,7 @@ public class CNNdroid {
         else
             return str.substring(0, i);
     }
-
+//添加新的网络层
     private boolean deriveLayer(String str) {
         String[] strArr = str.split("\n");
 
@@ -285,7 +285,7 @@ public class CNNdroid {
 
         String endStr = strArr[strArr.length - 1];
         endStr = endStr.trim();
-        if (!endStr.startsWith("}"))
+        if (!endStr.startsWith("}"))//利用网络层定义文件中的{}定义，进行文件每个网络层分割
             return false;
         endStr = endStr.substring(1);
         endStr = endStr.trim();

@@ -53,6 +53,10 @@ public class Convolution implements LayerInterface {
         None
     }
 
+
+    //卷积层调用方法
+    //Convolution c = new Convolution(new int[]{stride, stride}, new int[]{pad, pad}, group,
+    //        参数文件路径, parallel, loadtAtStart[layerCounter], autoTuning, myRS, name, rootDir + tuningFolder);
     public Convolution(int[] stride, int[] pad, int group, String paramFilePath, boolean parallel, boolean loadParamsAtStart, boolean tuneFunc, RenderScript myRS, String name, String tuningFolder) {
         this.paramFilePath = paramFilePath;
         this.stride = stride;
@@ -89,8 +93,8 @@ public class Convolution implements LayerInterface {
             long loadTime = System.currentTimeMillis();
 
             Object[] objects = paramUnpacker.unpackerFunction(paramFilePath, new Class[]{float[][][][].class, float[].class});
-            weight = (float[][][][]) objects[0];
-            bias = (float[]) objects[1];
+            weight = (float[][][][]) objects[0];//加载文件参数w
+            bias = (float[]) objects[1];//获取卷积层参数b
 
             loadTime = System.currentTimeMillis() - loadTime;
 
@@ -326,7 +330,7 @@ public class Convolution implements LayerInterface {
         float[] frameMatrix = new float[h_i * w_i * c_i_4];
         int delta_c = (c_i_4 - c_i) / group;
 
-        for (int n = 0; n < (n_i); n++) {// for n in images
+        for (int n = 0; n < (n_i); n++) {// 切忌这边的n_i等于batch size 大小
             if (n == 0) {
                 for (int i = 0; i < c_i_4; i++)
                     for (int j = 0; j < h_i; j++)
@@ -343,7 +347,7 @@ public class Convolution implements LayerInterface {
             myScript41.set_In_Blob(frameAllocation);
 
             myScript41.forEach_root(outAllocation);
-
+            //下面的if语句好像是多余的
             if (n < n_i - 1) {
                 for (int i = 0; i < c_i_4; i++)
                     for (int j = 0; j < h_i; j++)
@@ -1529,22 +1533,24 @@ public class Convolution implements LayerInterface {
 
 
     ///////////////////////////////Kernel Initialization Functions//////////////////////////////////
+    //设置成GPU每次输入4张feature map，输出一张feature map模式
     private void initKernelF4F1(float[][][][] myWeight, float[] myBias) {
-        int n_k = myWeight.length;
+        int n_k = myWeight.length;//获取参数矩阵w(output_channel,input_channel,卷积核宽，高)
         int c_k = myWeight[0].length;
         int h_k = myWeight[0][0].length;
         int w_k = myWeight[0][0][0].length;
 
-        int c_k_4 = c_k;
+        int c_k_4 = c_k;//input_channel，如果不是向上取整，使其成为4的倍数，input_channel=21，那么c_k_4=24
         if (c_k % 4 != 0)
             c_k_4 = c_k + 4 - c_k % 4;
 
         Allocation kernelAllocation;
         Allocation biasAllocation;
-        Type kernelType = Type.createX(myRS, Element.F32_4(myRS), n_k * c_k_4 * h_k * w_k / 4);
+        //Element.F32_4表示一个vec4f类型，创建一个包含n_k * c_k_4 * h_k * w_k个四维向量的以为数组，等价与c++ vector<vec4f>kernelType(n_k * c_k_4 * h_k * w_k / 4)
+        Type kernelType = Type.createX(myRS, Element.F32_4(myRS), n_k * c_k_4 * h_k * w_k / 4);//myRs是Renderscript对象
         Type biasType = Type.createX(myRS, Element.F32(myRS), n_k);
 
-        float[] kernelMatrix = new float[n_k * h_k * w_k * c_k_4];
+        float[] kernelMatrix = new float[n_k * h_k * w_k * c_k_4];//参数矩阵转置成为（n_k,h_k, w_k, c_k_4）存储顺序
         float[] biasArray = new float[n_k];
         int delta_n = (n_k - n_k) / group;
         for (int i = 0; i < n_k; i++)
@@ -1552,7 +1558,7 @@ public class Convolution implements LayerInterface {
                 for (int k = 0; k < h_k; k++)
                     for (int l = 0; l < w_k; l++) {
                         if (j >= c_k || ((i >= n_k / group - delta_n) && (i < n_k / group)) || (i >= n_k - delta_n))
-                            kernelMatrix[i * h_k * w_k * c_k_4 + k * w_k * c_k_4 + l * c_k_4 + j] = 0;
+                            kernelMatrix[i * h_k * w_k * c_k_4 + k * w_k * c_k_4 + l * c_k_4 + j] = 0;//因为output_channel必须是4的倍数，那么插入的卷积核全部补零
                         else if (i >= n_k / group)
                             kernelMatrix[i * h_k * w_k * c_k_4 + k * w_k * c_k_4 + l * c_k_4 + j] = myWeight[i - delta_n][j][k][l];
                         else
@@ -1567,7 +1573,7 @@ public class Convolution implements LayerInterface {
             else
                 biasArray[i] = myBias[i];
         }
-
+        //把参数从cpu拷贝到GPU中
         kernelAllocation = Allocation.createTyped(myRS, kernelType, Allocation.MipmapControl.MIPMAP_NONE, Allocation.USAGE_GRAPHICS_TEXTURE | Allocation.USAGE_SCRIPT);
         kernelAllocation.copyFrom(kernelMatrix);
 

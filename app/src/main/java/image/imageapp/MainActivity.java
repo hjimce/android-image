@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +15,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.graphics.Rect;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 //GPUimage库导入
 import jp.co.cyberagent.android.gpuimage.GPUImage;
 import jp.co.cyberagent.android.gpuimage.GPUImageSobelEdgeDetection;
@@ -82,24 +85,25 @@ public class MainActivity extends AppCompatActivity {
 
             //读取图片，并显示到控件imageView
             ImageView imageView = (ImageView) findViewById(R.id.imageView);
-            Bitmap d= BitmapFactory.decodeFile(picturePath);
-            int nh = (int) ( d.getHeight() * (512.0 / d.getWidth()) );//把图片缩放到可以在屏幕上显示
-            Bitmap scaled = Bitmap.createScaledBitmap(d, 512, nh, true);
-            //gpu 预处理
-            GPUImage mGPUImage = new GPUImage(this);
+            Bitmap scaled= BitmapFactory.decodeFile(picturePath).copy(Bitmap.Config.ARGB_8888, true);
+            //int nh = (int) ( d.getHeight() * (512.0 / d.getWidth()) );//把图片缩放到可以在屏幕上显示
+            //
+    //××××××××××××××××××××1、GPUImage实验××××××××××××××××××//
+            /*GPUImage mGPUImage = new GPUImage(this);
             //mGPUImage.setGLSurfaceView((GLSurfaceView) findViewById(R.id.imageView));//加入这句，程序会崩溃
             mGPUImage.setImage(scaled); //设置gpu要处理的图片
             mGPUImage.setFilter(new GPUImageSobelEdgeDetection());//设置滤波方法
-            Bitmap resultimage = mGPUImage.getBitmapWithFilterApplied();//进行gpu图像处理，获取处理后的图片
+            Bitmap resultimage = mGPUImage.getBitmapWithFilterApplied();//进行gpu图像处理，获取处理后的图片*/
 
-
-            try {
+    //××××××××××××××××××××2、cnn实验××××××××××××××××××//
+            /*try {
                 // 1) Create a Renderscript object
                 RenderScript myRenderScript = RenderScript.create(this);
 
                 // 2) Construct a CNNdroid object
                 //	  and provide NetFile location address.
-                String NetFile = "/sdcard/1_def.txt";
+                //String NetFile = "/sdcard/1_def.txt";
+                String NetFile = "/storage/emulated/0/develop/cnn/1_def.txt";
                 CNNdroid myCNN = new CNNdroid(myRenderScript, NetFile);
 
                 // 3) Prepare your input to the network.
@@ -111,15 +115,31 @@ public class MainActivity extends AppCompatActivity {
                 //	  when the computation is finished.
                 Object output = myCNN.compute(inputSingle);
                 imageView.setImageBitmap(resultimage);//设置view控件中的显示内容
+                TextView tv = (TextView) findViewById(R.id.sample_text);
+                tv.setText(output.toString());
 
 
 
             } catch (Exception e) {
-                TextView tv = (TextView) findViewById(R.id.sample_text);
-                //tv.setText(stringFromJNI(picturePath));
-                tv.setText(e.toString());
+               // TextView tv = (TextView) findViewById(R.id.sample_text);
+               // tv.setText(stringFromJNI(picturePath));
+                //tv.setText(e.toString());
                 e.printStackTrace();
-            }
+            }*/
+
+    //××××××××××××××××××××3、cnn实验××××××××××××××××××//
+            int[] rect=face_detection(scaled);
+            Canvas canvas=new Canvas(scaled);
+            Paint p=new Paint();
+            p.setColor(Color.RED);
+            canvas.drawLine(rect[0], rect[1], rect[2], rect[1], p);//up
+            canvas.drawLine(rect[0], rect[1], rect[0], rect[3], p);//left
+            canvas.drawLine(rect[0], rect[3], rect[2], rect[3], p);//down
+            canvas.drawLine(rect[2], rect[1], rect[2], rect[3], p);
+            //cnvs.drawRect(rectangle,paint);
+            imageView.setImageBitmap(scaled);
+
+
 
 
 
@@ -133,10 +153,35 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+    private int[] face_detection(Bitmap origin_image){
+        float scale = 512.f/ Math.max(origin_image.getHeight(), origin_image.getWidth());
+        int width = (int)(origin_image.getWidth()*scale);
+        int height = (int)(origin_image.getHeight()*scale);
+        Bitmap resize_image=Bitmap.createScaledBitmap(origin_image,width,height , true);
+
+        // 保存所有的像素的数组，图片宽×高
+        int[] pixels = new int[width * height];
+
+        resize_image.getPixels(pixels, 0, width, 0, 0, width, height);
+        int[] rect=stringFromJNI(pixels,height,width);
+        int[] result_rect=new int[4];
+        result_rect[0]=(int)(rect[0]/scale);
+        result_rect[1]=(int)(rect[1]/scale);
+        result_rect[2]=(int)(rect[2]/scale);
+        result_rect[3]=(int)(rect[3]/scale);
+        result_rect[2]=result_rect[2]+result_rect[0];
+        result_rect[3]=result_rect[3]+result_rect[1];
+
+
+
+
+        return  result_rect;
+    }
     /**
      * A native method that is implemented by the 'native-lib' native library,
      * which is packaged with this application.
      */
-    public native String stringFromJNI(String imagepath);
+    public native int[] stringFromJNI(int []image_data,int image_height,int image_widht);
     private static int RESULT_LOAD_IMAGE = 1;
 }
+

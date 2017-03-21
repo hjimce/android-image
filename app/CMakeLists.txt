@@ -9,6 +9,7 @@ cmake_minimum_required(VERSION 3.4.1)
 # You can define multiple libraries, and CMake builds it for you.
 # Gradle automatically packages shared libraries with your APK.
 
+add_subdirectory(src/main/cpp/face_detection)
 add_library( # Sets the name of the library.
              native-lib
 
@@ -39,6 +40,8 @@ find_library( # Sets the name of the path variable.
 
 target_link_libraries( # Specifies the target library.
                        native-lib
+
+                       CDlibFace
 
                        # Links the target library to the log library
                        # included in the NDK.
