@@ -6,7 +6,7 @@
 
 
 INCLUDE_DIRECTORIES(.)
-include(dlib/cmake)
+
 add_library( # Sets the name of the library.
              CDlibFace
 

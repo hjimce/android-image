@@ -21,32 +21,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/button"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/sample_text"
-        android:layout_toStartOf="@+id/sample_text" />
-
-    <RadioButton
-        android:text="开启摄像头"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/radioButton"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_above="@+id/imageView"
-        android:layout_toRightOf="@+id/sample_text"
-        android:layout_toEndOf="@+id/sample_text" />
-
-    <TextView
-        android:id="@+id/sample_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="计算时间："
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@+id/imageView" />
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

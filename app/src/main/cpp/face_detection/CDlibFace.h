@@ -5,8 +5,7 @@
 #ifndef TINY_CNN_CDLIBFACE_H
 #define TINY_CNN_CDLIBFACE_H
 
-#include <vector>
-#include <iostream>
+
 
 
 

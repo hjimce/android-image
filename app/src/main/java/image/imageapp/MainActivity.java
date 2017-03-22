@@ -132,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
             Canvas canvas=new Canvas(scaled);
             Paint p=new Paint();
             p.setColor(Color.RED);
+            p.setStrokeWidth(3.0f);
             canvas.drawLine(rect[0], rect[1], rect[2], rect[1], p);//up
             canvas.drawLine(rect[0], rect[1], rect[0], rect[3], p);//left
             canvas.drawLine(rect[0], rect[3], rect[2], rect[3], p);//down
@@ -154,10 +155,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private int[] face_detection(Bitmap origin_image){
-        float scale = 512.f/ Math.max(origin_image.getHeight(), origin_image.getWidth());
+        float scale = 240.f/ Math.max(origin_image.getHeight(), origin_image.getWidth());
         int width = (int)(origin_image.getWidth()*scale);
         int height = (int)(origin_image.getHeight()*scale);
-        Bitmap resize_image=Bitmap.createScaledBitmap(origin_image,width,height , true);
+        Bitmap resize_image=Bitmap.createScaledBitmap(origin_image,width,height , false);
 
         // 保存所有的像素的数组，图片宽×高
         int[] pixels = new int[width * height];
