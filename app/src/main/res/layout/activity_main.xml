@@ -15,13 +15,27 @@
         android:id="@+id/imageView"
         android:layout_alignParentEnd="true" />
 
+    <TextView
+        android:text="耗时：0.0ms"
+        android:textSize="15dp"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/textView"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/button"
+        android:layout_toEndOf="@+id/button" />
+
     <Button
         android:text="打开图片"
+        android:textSize="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button"
+        android:layout_marginStart="65dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>

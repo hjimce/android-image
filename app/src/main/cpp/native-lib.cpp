@@ -12,7 +12,7 @@
 
 dlib::frontal_face_detector m_facedetector=dlib::get_frontal_face_detector();
 //获取人脸框
-std::vector<int > getfacerect(const std::vector<int>img,int height,int width)
+std::vector<int > getfacerect(const std::vector<int>&img,int height,int width)
 {
     dlib::array2d<unsigned char>image;
     image.set_size(height,width);

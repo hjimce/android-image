@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -164,6 +165,8 @@ public class MainActivity extends AppCompatActivity {
         int[] pixels = new int[width * height];
 
         resize_image.getPixels(pixels, 0, width, 0, 0, width, height);
+
+        long startime= System.currentTimeMillis();
         int[] rect=stringFromJNI(pixels,height,width);
         int[] result_rect=new int[4];
         result_rect[0]=(int)(rect[0]/scale);
@@ -172,6 +175,9 @@ public class MainActivity extends AppCompatActivity {
         result_rect[3]=(int)(rect[3]/scale);
         result_rect[2]=result_rect[2]+result_rect[0];
         result_rect[3]=result_rect[3]+result_rect[1];
+        long endtime= System.currentTimeMillis();
+        TextView tv = (TextView) findViewById(R.id.textView);
+        tv.setText("耗时： "+(endtime-startime)+"ms");
 
 
 
