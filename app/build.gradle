@@ -13,7 +13,7 @@ android {
     buildToolsVersion "24.0.1"
     defaultConfig {
         applicationId "image.imageapp"
-        minSdkVersion 19
+        minSdkVersion 24
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
@@ -23,13 +23,22 @@ android {
                 cppFlags "-std=c++11"
                 cppFlags "-fexceptions"
                 cppFlags "-frtti"
+
+
+                arguments "-DANDROID_ARM_NEON=TRUE", "-DANDROID_TOOLCHAIN=clang"
             }
+        }
+        ndk {
+            abiFilters 'armeabi-v7a'//'x86'//定义abi，根据手机cpu而定，cpu分为：x86、arm7、x86_64等
         }
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+        debug{
             signingConfig signingConfigs.config
         }
     }

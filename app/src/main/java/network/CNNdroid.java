@@ -65,8 +65,8 @@ public class CNNdroid {
 
 
         for (int i = 0 ; i < layers.size() ; i++) {
+            Object temp = output;
             output = layers.get(i).compute(output);
-            Log.d("CNNdroid", "Error: input type is not supported"+i);
 
         }
 

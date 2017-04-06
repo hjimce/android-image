@@ -88,7 +88,6 @@ public class Convolution implements LayerInterface {
             algorithm = "F8F4";
             tuneNow = false;
         }
-
         if (loadParamsAtStart && (!tuneNow || !parallel)) {
             long loadTime = System.currentTimeMillis();
 
