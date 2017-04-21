@@ -1,0 +1,7 @@
+lightbrown
+darkbrown
+black
+blue
+darkgray
+lightgray
+green
